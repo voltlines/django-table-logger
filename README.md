@@ -14,7 +14,8 @@ A django package that allows easy logging of table changes to anywhere
 ```
 TABLE_LOGGER_CONFIG = {
     'LOGGER_ENABLED': True, (default: False)
-    'LOGGER_ADD_LOG_TIME': True, (default: False, will be added as UTC timestamp in milliseconds)
+    'LOGGER_ADD_LOG_TIME': True, (default: False, will be added as UTC timestamp in seconds or milliseconds)
+    'LOGGER_LOG_TIME_IN_MILLISEC': False, (default: False, log_time will be in milliseconds)
     'LOGGER_FUNC': 'voltlines.core.log_table_change_revision',
     'LOGGER_VALUE_CAST_MAPPING': {
         'django.contrib.gis.geos.point.Point': 'voltlines.core.helpers.convert_point_to_str' # noqa
@@ -22,7 +23,7 @@ TABLE_LOGGER_CONFIG = {
     },
     'LOGGER_MODELS': {
         'voltlines.companies.models.Company': ['name']
-        'voltlines.routes.models.Route': ['origin', 'name']
+        'voltlines.routes.models.Route': ['origin', 'name|voltlines.core.utils.make_str_title']
     }
 }
 ```
